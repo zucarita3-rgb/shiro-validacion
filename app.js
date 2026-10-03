@@ -143,12 +143,8 @@ form.addEventListener("submit",async ev=>{
  // plan zoom on scroll
  const plan=document.querySelector(".f-plan");
  if(plan){const z=()=>{const r=plan.getBoundingClientRect(),k=Math.min(1,Math.max(0,1-(r.top/innerHeight)));plan.style.setProperty("--z",(1.08-k*0.08).toFixed(3))};addEventListener("scroll",z,{passive:true});z()}
- // cursor + magnetic buttons (desktop only)
+ // magnetic buttons (desktop only)
  if(matchMedia("(hover:hover) and (pointer:fine)").matches){
-   const c=document.getElementById("cur"),d=document.getElementById("curDot");let mx=innerWidth/2,my=innerHeight/2,cx=mx,cy=my;
-   addEventListener("pointermove",e=>{mx=e.clientX;my=e.clientY;d.style.transform=`translate(${mx}px,${my}px)`},{passive:true});
-   (function f(){cx+=(mx-cx)*.16;cy+=(my-cy)*.16;c.style.transform=`translate(${cx}px,${cy}px)`;requestAnimationFrame(f)})();
-   document.querySelectorAll("a,button,summary,.spot").forEach(el=>{el.addEventListener("pointerenter",()=>c.classList.add("big"));el.addEventListener("pointerleave",()=>c.classList.remove("big"))});
    document.querySelectorAll(".btn").forEach(b=>{b.addEventListener("pointermove",e=>{const r=b.getBoundingClientRect();b.style.transform=`translate(${(e.clientX-r.left-r.width/2)*.18}px,${(e.clientY-r.top-r.height/2)*.28}px)`});b.addEventListener("pointerleave",()=>b.style.transform="")});
  }
 })();
